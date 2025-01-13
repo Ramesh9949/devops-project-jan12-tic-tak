@@ -34,5 +34,7 @@ jobs:
             docker tag bhav ramesh2005/bhav:latest
             docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             docker push ramesh2005/bhav:latest
+      - name: trivy scan
+        run: trivy image ramesh2005/bhav:latest > trivyimage.txt
                 
 
