@@ -26,7 +26,7 @@ jobs:
              node-version: '20' # or whatever version you need
       - run: npm install    # now npm commands will work
       - name: deploy to container
-        run: docker rm bhavya
+        run: docker rm -f $(docker ps -aq)
       - name: Update kubeconfig
         run: aws eks --region ap-south-1 update-kubeconfig --name EKS_CLOUD
       - name: Deploy to EKS
