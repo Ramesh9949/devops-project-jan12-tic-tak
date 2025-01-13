@@ -28,7 +28,7 @@ jobs:
 
       - name: trivy install
         run: trivy fs . > trivyfs.txt
-      - name: docker build and push
+      - name: docker build and push for docker
         run: |
             docker build -t bhav .
             docker tag bhav ramesh2005/bhav:latest
