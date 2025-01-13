@@ -36,5 +36,13 @@ jobs:
             docker push ramesh2005/bhav:latest
       - name: trivy scan
         run: trivy image ramesh2005/bhav:latest > trivyimage.txt
-                
+  deploy:
+    needs: Build
+    runs-on: [linux]
+    steps:
+      - name: docker pull image
+        run: docker pull ramesh2005/bhav:latest
+      - name: trivy scan
+        run: trivy image ramesh2005/bhav:latest > trivyimagedeploy.txt
 
+                    
