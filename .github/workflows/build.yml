@@ -44,5 +44,7 @@ jobs:
         run: docker pull ramesh2005/bhav:latest
       - name: trivy scan
         run: trivy image ramesh2005/bhav:latest > trivyimagedeploy.txt
+      - name: deploy to container
+        run: docker run --name game -d -p 3000:3000 ramesh2005/bhav:latest
 
                     
