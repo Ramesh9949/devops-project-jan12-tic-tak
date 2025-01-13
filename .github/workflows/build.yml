@@ -25,5 +25,8 @@ jobs:
         with:
              node-version: '20' # or whatever version you need
       - run: npm install    # now npm commands will work
+
+      - name: trivy install
+        run: trivy fs . > trivyfs.txt
                 
 
