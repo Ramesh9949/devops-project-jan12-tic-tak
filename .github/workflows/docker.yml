@@ -45,7 +45,7 @@ jobs:
       - name: trivy scan
         run: trivy image ramesh2005/bhav:latest > trivyimagedeploy.txt
       - name: deploy to container
-        run: docker run --name game -d -p 3000:3000 ramesh2005/bhav:latest
+        run: docker run --name bhavya -d -p 3000:3000 ramesh2005/bhav:latest
       - name: Update kubeconfig
         run: aws eks --region ap-south-1 update-kubeconfig --name EKS_CLOUD
       - name: Deploy to EKS
