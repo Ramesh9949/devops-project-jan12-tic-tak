@@ -20,6 +20,10 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      - name: NPM INSTALL
-        run: npm i 
-      
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+             node-version: '20' # or whatever version you need
+      - run: npm install    # now npm commands will work
+                
+
