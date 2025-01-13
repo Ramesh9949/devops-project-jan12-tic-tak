@@ -25,31 +25,12 @@ jobs:
         with:
              node-version: '20' # or whatever version you need
       - run: npm install    # now npm commands will work
-
-      - name: trivy install
-        run: trivy fs . > trivyfs.txt
-      - name: docker build and push for docker
-        run: |
-            docker build -t bhav .
-            docker tag bhav ramesh2005/bhav:latest
-            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-            docker push ramesh2005/bhav:latest
-      - name: trivy scan
-        run: trivy image ramesh2005/bhav:latest > trivyimage.txt
-  deploy:
-    needs: Build
-    runs-on: [linux]
-    steps:
-      - name: docker pull image
-        run: docker pull ramesh2005/bhav:latest
-      - name: trivy scan
-        run: trivy image ramesh2005/bhav:latest > trivyimagedeploy.txt
       - name: deploy to container
-        run: docker run --name bhavya -d -p 3000:3000 ramesh2005/bhav:latest
+        run: docker rm bhavya
       - name: Update kubeconfig
         run: aws eks --region ap-south-1 update-kubeconfig --name EKS_CLOUD
       - name: Deploy to EKS
-        run: kubectl apply -f deployment-service.yml  
+        run: kubectl delete -f deployment-service.yml  
 
  
 
